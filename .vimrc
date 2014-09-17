@@ -19,7 +19,7 @@ Plugin 'scrooloose/nerdtree'
 Plugin 'oblitum/rainbow'
 Plugin 'wting/rust.vim'
 Plugin 'gabrielelana/vim-markdown'
-Plugin 'Valloric/YouCompleteMe' " This is a COMPILED plugin. https://github.com/Valloric/YouCompleteMe#ubuntu-linux-x64-super-quick-installation
+"Plugin 'Valloric/YouCompleteMe' " This is a COMPILED plugin. https://github.com/Valloric/YouCompleteMe#ubuntu-linux-x64-super-quick-installation
                                 " You'll need clang, cmake, and python-devel
 Plugin 'scrooloose/syntastic'
 " The following are examples of different formats supported.

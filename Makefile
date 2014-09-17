@@ -16,6 +16,5 @@ all:
 	git clone git://github.com/robbyrussell/oh-my-zsh.git ~/.oh-my-zsh || true
 	# Vundle Install
 	vim -c "execute \"VundleInstall\" | q | q"
-	exec ~/.vim/bundle/YouCompleteMe/install.sh --clang-completer
 	# Instructions
 	echo 'Use `chsh -s <zsh location>` to set your terminal to ZSH.'
