@@ -14,7 +14,7 @@ Plugin 'tpope/vim-projectionist'
 Plugin 'tpope/vim-dispatch'
 Plugin 'guns/vim-clojure-static'
 Plugin 'tpope/vim-fireplace'
-Plugin 'altercation/vim-colors-solarized'
+Plugin 'Lokaltog/vim-distinguished'
 Plugin 'scrooloose/nerdtree'
 Plugin 'oblitum/rainbow'
 Plugin 'wting/rust.vim'
@@ -53,7 +53,7 @@ syntax enable
 set encoding=utf8
 set ffs=unix,mac,dos
 set background=dark
-colorscheme solarized 
+colorscheme distinguished 
 highlight MatchParen cterm=bold ctermfg=cyan
 " Rainbow Colors Improved Setup
 au FileType c,cpp,objc,objcpp,go,rust,javascript,java call rainbow#load()
