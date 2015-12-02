@@ -1,5 +1,5 @@
-source ~/.zsh/prompt.zsh
-source ~/.zsh/antigen.zsh
+source ~/.config/zsh/prompt.zsh
+source ~/.config/zsh/antigen.zsh
 # Bundles
 antigen bundle git
 antigen bundle command-not-found
