@@ -94,6 +94,14 @@ set nobackup
 set nowb
 set noswapfile
 set nocompatible
+" Improve smoothness
+set ttyfast
+" Don't redraw while executing macros
+set lazyredraw
+" Show partially typed commands at the bottom
+set showcmd
+" Show tab bar if there are at least two tabs
+set showtabline=1
 
 " Indents
 set expandtab
