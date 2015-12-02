@@ -1,7 +1,8 @@
 all:
 	# Hoverbear's Arch Linux friendly dotfile config.
 	# Choose a task:
-	#  * nvim - Install nvim & configs
+	#  * nvim - Install nvim configs
+	#  * zsh  - Install zsh configs
 
 # Configure `nvim`
 NVIM_CONFIG_FOLDER=~/.config/nvim
@@ -25,13 +26,17 @@ ZSH_CONFIG_FOLDER=~/.config/zsh
 ZSH_RC_SRC=zsh/zshrc
 ZSH_RC_DST=~/.zshrc
 ZSH_ANTIGEN_SRC_URL=https://raw.githubusercontent.com/zsh-users/antigen/master/antigen.zsh
-ZSH_ANTIGEN_DST=$(ZSH_CONFIG_FOLDER)/antigen.vim
+ZSH_ANTIGEN_DST=$(ZSH_CONFIG_FOLDER)/antigen.zsh
+ZSH_PROMPT_SRC=zsh/prompt.zsh
+ZSH_PROMPT_DST=$(ZSH_CONFIG_FOLDER)/prompt.zsh
 
-zsh: $(ZSH_RC_DST) $(ZSH_ANTIGEN_DST)
+zsh: $(ZSH_RC_DST) $(ZSH_PROMPT_DST) $(ZSH_ANTIGEN_DST)
 # Install the `~/.zshrc`
 $(ZSH_RC_DST):
-	mkdir -p $(ZSH_RC_DST)
 	ln $(ZSH_RC_SRC) $(ZSH_RC_DST)
 # Now install `antigen`
 $(ZSH_ANTIGEN_DST):
-	curl -fLo $(ZSH_ANTIGEN_SRC_URL) --create-dirs $(ZSH_ANTIGEN_DST)
+	curl -fLo  $(ZSH_ANTIGEN_DST) --create-dirs $(ZSH_ANTIGEN_SRC_URL)
+$(ZSH_PROMPT_DST):
+	mkdir -p $(ZSH_CONFIG_FOLDER)
+	ln $(ZSH_PROMPT_SRC) $(ZSH_PROMPT_DST)
