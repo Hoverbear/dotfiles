@@ -1,4 +1,4 @@
-source ~/.zsh/shell_prompt.sh
+source ~/.zsh/prompt.zsh
 source ~/.zsh/antigen.zsh
 # Bundles
 antigen bundle git
