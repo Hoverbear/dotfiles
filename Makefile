@@ -1,20 +1,15 @@
-# Deps:
-#  * git
-#  * zsh
-#  * tmux
-#  * ??
 
-all:
-	# Setup configs.
-	cp -i .vimrc ~/.vimrc
-	cp -i .zshrc ~/.zshrc
-	cp -i .dir_colors ~/.dir_colors
-	cp -i .tmux.conf ~/.tmux.conf
-	cp -i .xresources ~/.xresources
-	# Install Deps
-	git clone https://github.com/gmarik/Vundle.vim.git ~/.vim/bundle/Vundle.vim || true
-	git clone git://github.com/robbyrussell/oh-my-zsh.git ~/.oh-my-zsh || true
-	# Vundle Install
-	vim -c "execute \"VundleInstall\" | q | q"
-	# Instructions
-	echo 'Use `chsh -s <zsh location>` to set your terminal to ZSH.'
+
+
+# Configure `nvim`
+NVIM_FOLDER="~/.config/nvim"
+NVIM_INIT_SRC="nvim/init.vim"
+NVIM_INIT_DST="${NVIM_FOLDER}/init.vim"
+${NVIM_INIT_DST}:
+	ln -s "${NVIM_INIT_SRC}" "${NVIM_INIT_DST}"
+
+VIM_PLUG_SRC_URL="https://raw.githubusercontent.com/junegunn/vim-plug/master/plug.vim"
+VIM_PLUG_DST="${NVIM_FOLDER}/autoload/plug.vim"
+${VIM_PLUG_DST}:
+	curl -fLo "${VIM_PLUG_DST}" --create-dirs "${VIM_PLUG_SRC_URL}"
+nvim: ${NVIM_INIT_DST} ${VIM_PLUG_DST}

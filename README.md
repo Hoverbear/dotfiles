@@ -1,8 +1,7 @@
-# Quick Setup
-If you have the dependencies
+
 
 ```bash
-git clone https://github.com/Hoverbear/dotfiles
+git clone git@github.com:Hoverbear/dotfiles.git
 cd dotfiles
 make
 ```
