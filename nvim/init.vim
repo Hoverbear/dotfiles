@@ -2,25 +2,27 @@ filetype off " Just for now!
 set nocompatible              " be iMproved
 
 call plug#begin('~/.config/nvim/plugged')
-Plug 'wting/rust.vim'
-Plug 'ajh17/Spacegray.vim'
-Plug 'scrooloose/nerdtree'
-Plug 'kien/ctrlp.vim'
-Plug 'cespare/vim-toml'
-Plug 'scrooloose/syntastic'
-Plug 'kien/ctrlp.vim'
-Plug 'tpope/vim-fugitive'
-Plug 'bling/vim-airline'
-Plug 'tpope/vim-commentary'
-Plug 'scrooloose/nerdtree'
+" Language support
+Plug 'sheerun/vim-polyglot'
 Plug 'mustache/vim-mustache-handlebars'
-"Plug 'Shougo/neocomplete.vim'
-Plug 'ervandew/supertab'
+Plug 'cespare/vim-toml'
+Plug 'tpope/vim-liquid'
+" Theme
+Plug 'ajh17/Spacegray.vim'
+Plug 'bling/vim-airline'
 Plug 'airblade/vim-gitgutter'
 Plug 'edkolev/tmuxline.vim'
 Plug 'edkolev/promptline.vim'
+" Utility
+Plug 'scrooloose/nerdtree'
+Plug 'kien/ctrlp.vim'
+Plug 'scrooloose/syntastic'
+Plug 'kien/ctrlp.vim'
+Plug 'tpope/vim-fugitive'
+Plug 'tpope/vim-commentary'
+Plug 'scrooloose/nerdtree'
+Plug 'ervandew/supertab'
 Plug 'racer-rust/vim-racer'
-Plug 'tpope/vim-liquid'
 Plug 'terryma/vim-multiple-cursors'
 call plug#end()
 
