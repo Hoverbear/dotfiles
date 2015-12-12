@@ -65,8 +65,8 @@ let g:tmuxline_powerline_separators = 1
 
 " Racer
 set hidden
-let g:racer_cmd = '~/.cargo/bin/racer'
-let $RUST_SRC_PATH = '~/git/rust/src/'
+let g:racer_cmd = "~/.cargo/bin/racer"
+let $RUST_SRC_PATH = $HOME . "/git/rust/src"
 let g:SuperTabDefaultCompletionType = "<C-x><C-o>"
 let g:racer_experimental_completer = 1
 
@@ -87,6 +87,7 @@ syntax enable
 set encoding=utf8
 set ffs=unix,mac,dos
 set background=dark
+set colorcolumn=80
 colorscheme spacegray
 
 " Fix some junk
