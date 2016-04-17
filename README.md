@@ -2,7 +2,7 @@
 A good batch of applications to install first:
 
 ```bash
-sudo pacman -Syu openssh git curl zsh neovim tmux firefox
+sudo pacman -Syu openssh git curl zsh neovim tmux firefox mosh
 ```
 
 If you're using `i3` you may also want:
