@@ -8,6 +8,10 @@ all:
 	#  * i3lock - Install i3 auto lock task.
 CONFIG_FOLDER=~/.config
 
+# Used for some potential cross-device links since we have to copy there.
+.FORCE:
+	# Since we copy we ~always~ do this task even if it's up to date.
+
 #
 # Configure `nvim`
 #
@@ -88,6 +92,18 @@ $(POWERLINE_CONF_DST):
 	mkdir -p $(FONTCONFIG_FOLDER)
 	curl -fL $(POWERLINE_CONF_URL) -o $(POWERLINE_CONF_DST)
 
+#
+# Configure any touchpads with some sane, modern settings.
+#
+SYNAPTICS_SRC=trackpad/60-synaptics.conf
+XORG_CONF=/etc/X11/xorg.conf.d/
+SYNAPTICS_DST=$(XORG_CONF)/60-synaptics.conf
+
+trackpad: $(SYNAPTICS_DST)
+$(SYNAPTICS_DST): .FORCE
+	sudo mkdir -p $(XORG_CONF)
+	sudo cp $(SYNAPTICS_SRC) $(SYNAPTICS_DST)
+
 
 #
 # Configure i3
@@ -112,11 +128,10 @@ $(I3STATUS_CONFIG_DST):
 # behaivor. Running this task will make `i3lock` spawn before each suspend.
 I3LOCK_SERVICE=i3lock.service
 I3LOCK_SRC=i3/$(I3LOCK_SERVICE)
-I3LOCK_DST=/etc/systemd/system/$(I3LOCK_SERVICE)
+I3LOCK_DST=$(CONFIG_FOLDER)/systemd/user/$(I3LOCK_SERVICE)
 i3lock: $(I3LOCK_DST)
 $(I3LOCK_DST): .FORCE
+	mkdir -p $(CONFIG_FOLDER)/systemd/user/
 	# Must copy, unfortunately! Many people put /etc on a different partition.
-	sudo cp $(I3LOCK_SRC) $(I3LOCK_DST)
-	sudo systemctl enable $(I3LOCK_SERVICE)
-.FORCE:
-	# Since we copy we ~always~ do this task even if it's up to date.
+	ln $(I3LOCK_SRC) $(I3LOCK_DST)
+	systemctl --user enable $(I3LOCK_SERVICE)
