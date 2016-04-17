@@ -8,7 +8,7 @@ sudo pacman -Syu openssh git curl zsh neovim tmux firefox mosh
 If you're using `i3` you may also want:
 
 ```bash
-sudo pacman -Syu i3 i3status i3lock
+sudo pacman -Syu i3 i3status i3lock feh xorg-xbacklight
 ```
 
 To setup:
