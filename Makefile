@@ -1,12 +1,16 @@
 all:
-	# Hoverbear's Arch Linux friendly dotfile config.
+	# Hoverbear's friendly dotfile config.
 	# Choose a task:
 	#  * nvim - Install nvim configs
 	#  * zsh  - Install zsh configs
-
+	#  * tmux - Install tmux configs
+	#  * i3   - Install i3 configs
+	#  * i3lock - Install i3 auto lock task.
 CONFIG_FOLDER=~/.config
 
+#
 # Configure `nvim`
+#
 NVIM_CONFIG_FOLDER=$(CONFIG_FOLDER)/nvim
 NVIM_INIT_SRC=nvim/init.vim
 NVIM_INIT_DST=$(NVIM_CONFIG_FOLDER)/init.vim
@@ -23,7 +27,9 @@ $(NVIM_PLUG_DST):
 	curl -fLo $(NVIM_PLUG_DST) --create-dirs $(NVIM_PLUG_SRC_URL)
 	nvim -c ":PlugInstall"
 
+#
 # Configure `zsh`
+#
 ZSH_CONFIG_FOLDER=$(CONFIG_FOLDER)/zsh
 ZSH_RC_SRC=zsh/zshrc
 ZSH_RC_DST=~/.zshrc
@@ -39,11 +45,14 @@ $(ZSH_RC_DST):
 # Now install `antigen`
 $(ZSH_ANTIGEN_DST):
 	curl -fLo  $(ZSH_ANTIGEN_DST) --create-dirs $(ZSH_ANTIGEN_SRC_URL)
+# Configure the prompt.
 $(ZSH_PROMPT_DST):
 	mkdir -p $(ZSH_CONFIG_FOLDER)
 	ln $(ZSH_PROMPT_SRC) $(ZSH_PROMPT_DST)
 
+#
 # Configure `tmux`
+#
 TMUX_CONFIG_FOLDER=$(CONFIG_FOLDER)/tmux
 TMUX_CONF_SRC=tmux/tmux.conf
 TMUX_CONF_DST=~/.tmux.conf
@@ -51,10 +60,42 @@ TMUX_PROMPT_SRC=tmux/prompt.conf
 TMUX_PROMPT_DST=$(TMUX_CONFIG_FOLDER)/prompt.conf
 
 tmux: $(TMUX_CONF_DST) $(TMUX_PROMPT_DST)
-# Install the `~/.tmux.conf`
+# Install the tmux config.
 $(TMUX_CONF_DST):
 	ln $(TMUX_CONF_SRC) $(TMUX_CONF_DST)
-# Now install the prompt into `~/.config/tmux/prompt.zsh`
+# Now install the prompt into the expected place.
 $(TMUX_PROMPT_DST):
 	mkdir -p $(TMUX_CONFIG_FOLDER)
 	ln $(TMUX_PROMPT_SRC) $(TMUX_PROMPT_DST)
+
+#
+# Configure i3
+#
+I3_CONFIG_FOLDER=$(CONFIG_FOLDER)/i3
+I3STATUS_CONFIG_FOLDER=$(CONFIG_FOLDER)/i3status
+I3_CONFIG_SRC=i3/config
+I3_CONFIG_DST=$(I3_CONFIG_FOLDER)/config
+I3STATUS_CONFIG_SRC=i3/status-config
+I3STATUS_CONFIG_DST=$(I3STATUS_CONFIG_FOLDER)/config
+
+i3: $(I3_CONFIG_DST) $(I3STATUS_CONFIG_DST)
+# Install the i3 config.
+$(I3_CONFIG_DST):
+	mkdir -p $(I3_CONFIG_FOLDER)
+	ln $(I3_CONFIG_SRC) $(I3_CONFIG_DST)
+$(I3STATUS_CONFIG_DST):
+	mkdir -p $(I3STATUS_CONFIG_FOLDER)
+	ln $(I3STATUS_CONFIG_SRC) $(I3STATUS_CONFIG_DST)
+
+# This is distinctly an opt-in task because it requires sudo and changes locki
+# behaivor. Running this task will make `i3lock` spawn before each suspend.
+I3LOCK_SERVICE=i3lock.service
+I3LOCK_SRC=i3/$(I3LOCK_SERVICE)
+I3LOCK_DST=/etc/systemd/system/$(I3LOCK_SERVICE)
+i3lock: $(I3LOCK_DST)
+$(I3LOCK_DST): .FORCE
+	# Must copy, unfortunately! Many people put /etc on a different partition.
+	sudo cp $(I3LOCK_SRC) $(I3LOCK_DST)
+	sudo systemctl enable $(I3LOCK_SERVICE)
+.FORCE:
+	# Since we copy we ~always~ do this task even if it's up to date.

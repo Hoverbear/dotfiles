@@ -1,0 +1,40 @@
+# i3status configuration file.
+# see "man i3status" for documentation.
+
+# It is important that this file is edited as UTF-8.
+# The following line should contain a sharp s:
+# ß
+# If the above line is not correctly displayed, fix your editor first!
+
+general {
+    colors = true
+        interval = 5
+}
+
+order += "disk /"
+order += "wireless _first_"
+order += "tztime berlin"
+order += "tztime local"
+order += "battery 0"
+
+wireless _first_ {
+    format_up = "Net: %ip %quality/%essid"
+    format_down = "Net: down"
+}
+
+disk "/" {
+    format = "disk: %used/%total"
+}
+
+battery 0 {
+    format = "🔋%percentage"
+}
+
+tztime berlin {
+    format = "Berlin: %m-%d %H:%M"
+    timezone = "Europe/Berlin"
+}
+
+tztime local {
+    format = "Local: %m-%d %H:%M"
+}
