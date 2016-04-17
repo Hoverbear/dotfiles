@@ -1,8 +1,8 @@
 
-A good batch of applications to install first (with `pacman -Syu` if you're on Arch):
+A good batch of applications to install first:
 
 ```bash
-openssh git curl zsh neovim tmux firefox
+sudo pacman -Syu openssh git curl zsh neovim tmux firefox
 ```
 
 To setup:
