@@ -69,6 +69,27 @@ $(TMUX_PROMPT_DST):
 	ln $(TMUX_PROMPT_SRC) $(TMUX_PROMPT_DST)
 
 #
+# Configure the powerline fonts for airline.
+# Used in nvim/tmux/zsh
+#
+POWERLINE_SYMBOLS_URL=https://github.com/powerline/powerline/raw/develop/font/PowerlineSymbols.otf
+POWERLINE_CONF_URL=https://github.com/powerline/powerline/raw/develop/font/10-powerline-symbols.conf
+FONT_FOLDER=~/.fonts/
+POWERLINE_SYMBOLS_DST=$(FONT_FOLDER)/PowerlineSymbols.otf
+FONTCONFIG_FOLDER=$(CONFIG_FOLDER)/fontconfig/conf.d/
+POWERLINE_CONF_DST=$(FONTCONFIG_FOLDER)/10-powerline-symbols.conf
+
+fonts: $(POWERLINE_SYMBOLS_DST) $(POWERLINE_CONF_DST)
+$(POWERLINE_SYMBOLS_DST):
+	mkdir -p $(FONT_FOLDER)
+	curl -fL $(POWERLINE_SYMBOLS_URL) -o $(POWERLINE_SYMBOLS_DST)
+	fc-cache -vf $(FONT_FOLDER)
+$(POWERLINE_CONF_DST):
+	mkdir -p $(FONTCONFIG_FOLDER)
+	curl -fL $(POWERLINE_CONF_URL) -o $(POWERLINE_CONF_DST)
+
+
+#
 # Configure i3
 #
 I3_CONFIG_FOLDER=$(CONFIG_FOLDER)/i3
