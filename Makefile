@@ -124,8 +124,7 @@ $(I3STATUS_CONFIG_DST):
 	mkdir -p $(I3STATUS_CONFIG_FOLDER)
 	ln $(I3STATUS_CONFIG_SRC) $(I3STATUS_CONFIG_DST)
 
-# This is distinctly an opt-in task because it requires sudo and changes locki
-# behaivor. Running this task will make `i3lock` spawn before each suspend.
+# Running this task will make `i3lock` spawn before each suspend.
 I3LOCK_SERVICE=i3lock.service
 I3LOCK_SRC=i3/$(I3LOCK_SERVICE)
 I3LOCK_DST=$(CONFIG_FOLDER)/systemd/user/$(I3LOCK_SERVICE)
