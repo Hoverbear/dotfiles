@@ -19,6 +19,7 @@ cd dotfiles
 make nvim
 make zsh
 make tmux
+make fonts
 make i3
 make i3lock
 ```
