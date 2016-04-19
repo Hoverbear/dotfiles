@@ -11,9 +11,12 @@
 
 set $mod Mod4
 
+# Set background
+exec --no-startup-id feh --bg-fill ~/.config/i3/desktop.png
+
 # Font for window titles. Will also be used by the bar unless a different font
 # is used in the bar {} block below.
-font pango:noto 8
+font pango:Noto Sans 8
 
 # This font is widely installed, provides lots of unicode glyphs, right-to-left
 # text rendering and scalability on retina/hidpi displays (thanks to pango).
@@ -40,7 +43,7 @@ bindsym $mod+Shift+q kill
 # There also is the (new) i3-dmenu-desktop which only displays applications
 # shipping a .desktop file. It is a wrapper around dmenu, so you need that
 # installed.
-bindsym $mod+p exec --no-startup-id i3-dmenu-desktop
+bindsym $mod+p exec --no-startup-id dmenu_run -fn "Noto Sans-10"
 
 # change focus
 bindsym $mod+Left focus left
@@ -111,8 +114,13 @@ bindsym $mod+Shift+0 move container to workspace number 10
 bindsym XF86MonBrightnessDown exec --no-startup-id xbacklight -dec 10%
 bindsym XF86MonBrightnessUp exec --no-startup-id xbacklight -inc 10%
 
-# Lock
-bindsym $mod+l exec --no-startup-id systemctl --user start i3lock
+# Volume
+bindsym XF86AudioMute exec --no-startup-id amixer set Master toggle
+bindsym XF86AudioRaiseVolume exec --no-startup-id amixer set Master 5%+
+bindsym XF86AudioLowerVolume exec --no-startup-id amixer set Master 5%-
+
+# Lock, you'll need to change this!
+bindsym $mod+l exec --no-startup-id sudo systemctl start i3lock@hoverbear
 
 # reload the configuration file
 bindsym $mod+Shift+c reload

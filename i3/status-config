@@ -12,6 +12,7 @@ general {
 }
 
 order += "disk /"
+order += "volume master"
 order += "wireless _first_"
 order += "tztime berlin"
 order += "tztime local"
@@ -37,4 +38,12 @@ tztime berlin {
 
 tztime local {
     format = "Local: %m-%d %H:%M"
+}
+
+volume master {
+        format = "♪: %volume"
+        format_muted = "♪: muted"
+        device = "default"
+        mixer = "Master"
+        mixer_idx = 0
 }
